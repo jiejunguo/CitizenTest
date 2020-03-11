@@ -1,19 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
+import IndexScreen from "./src/screens/IndexScreen";
+import { TestProvider } from "./src/context/TestContext";
 
-export default function App() {
+const navigator = createSwitchNavigator(
+  { Index: IndexScreen },
+  {
+    initialRouteName: "Index",
+    defaultNavigationOptions: { title: "Citizen Test" }
+  }
+);
+
+const App = createAppContainer(navigator);
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <TestProvider>
+      <App />
+    </TestProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
